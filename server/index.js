@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors')
-
+const cookieParser = require('cookie-parser')
 var corsOptions = {
     origin: 'http://localhost:3000',
     credentials: true,
@@ -10,14 +10,14 @@ var corsOptions = {
 const authRoutes = require('./routes/authRoutes');
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 app.use(authRoutes);
 
 const http = require('http').createServer(app);
 const mongoose = require('mongoose');
-const socketio = require('socket.io')
+const socketio = require('socket.io');
 const io = socketio(http);
-const mongoDB = "mongodb+srv://ashutosh_gupta:ashu2111@cluster0.jwwlc.mongodb.net/chat-database?retryWrites=true&w=majority";
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('connected')).catch(err => console.log(err))
+mongoose.connect("mongodb+srv://ashutosh_gupta:ashu2111@cluster0.jwwlc.mongodb.net/chat-database?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('connected')).catch(err => console.log(err))
 const { addUser, getUser, removeUser } = require('./helper');
 const Message = require('./models/Message');
 const PORT = process.env.PORT || 5000;
@@ -34,6 +34,22 @@ const deleteroom = async (room_id) => {
     await Room.findByIdAndDelete(room_id.room_id);
 
 }
+
+app.use('/set-cookies', (req, res) => {
+    res.cookie('username', 'Tony');
+    res.cookie('isAuthenticated', true, { httpOnly: true });
+    res.send('Cookies are set');
+
+})
+
+app.use('/get-cookies', (req, res) => {
+
+    const cookies = req.cookies;
+    console.log(cookies);
+    res.json(cookies);
+
+
+})
 
 io.on('connection', (socket) => {
     console.log(socket.id);

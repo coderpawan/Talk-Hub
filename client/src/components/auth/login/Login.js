@@ -20,6 +20,7 @@ const Login = () => {
         try {
             const res = await fetch('http://localhost:5000/login', {
                 method: 'POST',
+                credentials: 'include',
                 body: JSON.stringify({ email, password }),
                 headers: { 'Content-Type': 'application/json' }
             });
