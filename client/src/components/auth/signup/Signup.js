@@ -36,7 +36,17 @@ const Signup = () => {
 
             }
             if (data.user) {
-                setUser(data.user)
+
+                const newuser = {
+                    name: data.user.name,
+                    _id: data.user._id,
+                    email: data.user.email
+
+                }
+
+                console.log(newuser);
+
+                setUser(newuser)
             }
         } catch (error) {
             console.log(error)

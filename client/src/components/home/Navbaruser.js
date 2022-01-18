@@ -20,7 +20,6 @@ const Navbaruser = () => {
                     <a href="#!" class="brand-logo right">AsHuToSh's ChAtRoOm</a>
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                     <ul class="left hide-on-med-and-down">
-                        <li><a href="/update">Edit details</a></li>
                         <li onClick={logout}><a href="/">Logout</a></li>
                         <li><a href="/signup">Sign-up</a></li>
 
@@ -29,7 +28,6 @@ const Navbaruser = () => {
             </nav>
 
             <ul class="sidenav" id="mobile-demo">
-                <li><a href="/update">Edit details</a></li>
                 <li onClick={logout}><a href="/">Logout</a></li>
                 <li><a href="/signup">Sign-up</a></li>
 

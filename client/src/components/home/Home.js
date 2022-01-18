@@ -1,7 +1,6 @@
-import react, { useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../UserContext";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Navbarsw from "../Navbarsw";
 import RoomList from "./RoomList";
 import io from 'socket.io-client';

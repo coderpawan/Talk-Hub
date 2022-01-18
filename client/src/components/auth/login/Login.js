@@ -1,10 +1,14 @@
-import Navbar from '../../Navbarsw';
+
 import React, { useState, useContext } from 'react'
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { UserContext } from '../../../UserContext';
 import { Redirect } from 'react-router-dom';
 import img from '../../../account-image.png';
 
 import '../signup/signup.css'
+
+const clientId = "82449913701-a10nsdha9sb0mgo42u9emft6nr45asd5.apps.googleusercontent.com";
+
 
 
 const Login = () => {
@@ -25,7 +29,6 @@ const Login = () => {
                 headers: { 'Content-Type': 'application/json' }
             });
             const data = await res.json();
-            console.log(data)
 
             if (data.errors) {
                 console.log("hello");
@@ -34,14 +37,48 @@ const Login = () => {
 
 
             }
+
             if (data.user) {
                 console.log("hello user");
-                setUser(data.user)
+
+                const newuser={
+                    name:data.user.name,
+                    _id:data.user._id,
+                    email:data.user.email
+
+                }
+
+                console.log(newuser);
+
+                setUser(newuser)
             }
         } catch (error) {
             console.log(error)
         }
     }
+
+    const onLoginSuccess = (res) => {
+        console.log('Login Success:', res.profileObj);
+        console.log(res.profileObj.name);
+        console.log(res.profileObj.googleId);
+
+        const newuser = {
+            name: res.profileObj.name,
+            _id: res.profileObj.googleId,
+            email: res.profileObj.email
+
+        }
+
+
+        setUser(newuser);
+    };
+
+    const onLoginFailure = (res) => {
+        console.log('Login Failed:', res);
+    };
+
+
+
 
     if (user) {
         return <Redirect to='/' />
@@ -49,11 +86,11 @@ const Login = () => {
     return (
 
         <div className="main-w3layouts wrapper">
-            
+
             <div className="main-agileinfo">
                 <div className="agileits-top">
                     <form onSubmit={submitt}>
-                        <img class="logo" src={img}/>
+                        <img class="logo" src={img} />
                         <h1></h1>
                         <input className="text email" type="email" name="email" value={email} onChange={e => setemail(e.target.value)} placeholder="Email" required />
 
@@ -64,6 +101,22 @@ const Login = () => {
 
                         <button class="btnsignup">Login</button>
                     </form>
+                    <div className="row">
+                        <p className="col s8">Or sign in by Google</p>
+                    
+                        <GoogleLogin
+                            clientId={clientId}
+                            buttonText="Sign In"
+                            onSuccess={onLoginSuccess}
+                            onFailure={onLoginFailure}
+                            cookiePolicy={'single_host_origin'}
+                            isSignedIn={true}
+                        />
+
+                
+
+                    </div>
+
                     <p>Don't have an Account? <a href="/signup"> Sign-up!</a></p>
                     <p>Or go to <a href="/"> Home</a></p>
                 </div>

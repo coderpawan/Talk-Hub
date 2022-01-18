@@ -7,7 +7,6 @@ import Chat from './components/chat/Chat';
 import Home from './components/home/Home';
 import Login from './components/auth/login/Login';
 import Signup from './components/auth/signup/Signup';
-import Update from './components/auth/signup/Update';
 
 
 function App() {
@@ -41,7 +40,6 @@ function App() {
             <Route path="/chat/:room_id/:room_name" component={Chat} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
-            <Route path="/update" component={Update} />
           </Switch>
         </UserContext.Provider>
       </div>

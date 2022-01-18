@@ -78,12 +78,13 @@ io.on('connection', (socket) => {
         }
     })
 
-    socket.on('sendMessage', (message, room_id, callback) => {
-        const user = getUser(socket.id);
+    socket.on('sendMessage', (message, room_id,user, callback) => {
+
+        console.log("message recived");
 
         const msgToStore = {
             name: user.name,
-            user_id: user.user_id,
+            user_id: user._id,
             room_id,
             text: message
         }
