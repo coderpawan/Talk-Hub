@@ -1,6 +1,9 @@
 
-import React, { useState, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import FacebookLogin from 'react-facebook-login';
 import { UserContext } from '../../../UserContext';
 import { Redirect } from 'react-router-dom';
 import img from '../../../account-image.png';
@@ -76,6 +79,14 @@ const Login = () => {
     const onLoginFailure = (res) => {
         console.log('Login Failed:', res);
     };
+
+    const responseFacebook = (response) => {
+        console.log(response);
+    }
+
+    const componentClicked =(data)=>{
+        console.log(data);
+    }
 
 
 

@@ -7,7 +7,7 @@ var corsOptions = {
     credentials: true,
     optionsSuccessStatus: 200 // For legacy browser support
 }
-const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('./Routes/authRoutes');
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
@@ -16,12 +16,13 @@ app.use(authRoutes);
 const http = require('http').createServer(app);
 const mongoose = require('mongoose');
 const socketio = require('socket.io');
+const { addUser, getUser, removeUser } = require('./helper');
 const io = socketio(http);
 mongoose.connect("mongodb+srv://ashutosh_gupta:ashu2111@cluster0.jwwlc.mongodb.net/chat-database?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('connected')).catch(err => console.log(err))
-const { addUser, getUser, removeUser } = require('./helper');
-const Message = require('./models/Message');
+
+const Message = require('./Models/Message');
 const PORT = process.env.PORT || 5000;
-const Room = require('./models/Room');
+const Room = require('./Models/Room');
 
 
 const deletemsgs = async (room_id) => {
