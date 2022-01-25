@@ -3,7 +3,7 @@ import React from 'react'
 const Navbaruser = () => {
     const logout = async () => {
         try {
-            const res = await fetch('http://localhost:5000/logout', {
+            const res = await fetch('https://ashutoshchatroom.herokuapp.com/logout', {
                 credentials: 'include',
             });
             const data = res.json();

@@ -11,7 +11,7 @@ import Navbar from '../Navbarsw'
 let socket;
 
 const Chat = () => {
-    const ENDPT = 'localhost:5000';
+    const ENDPT = 'https://ashutoshchatroom.herokuapp.com';
     const { user, setUser } = useContext(UserContext)
 
     const { room_id, room_name } = useParams();

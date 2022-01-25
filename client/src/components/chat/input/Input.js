@@ -6,7 +6,7 @@ import { Link, Redirect } from 'react-router-dom';
 let socket;
 
 const Input = ({ message, setMessage, sendMessage, room_id, user, setMessages}) => {
-    const ENDPT = 'localhost:5000';
+    const ENDPT = 'https://ashutoshchatroom.herokuapp.com';
     const style = {
         color: 'white',
         margin: '10px',

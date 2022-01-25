@@ -20,7 +20,7 @@ const Signup = () => {
         setnameError('');
         setpasswordError('');
         try {
-            const res = await fetch('http://localhost:5000/signup', {
+            const res = await fetch('https://ashutoshchatroom.herokuapp.com//signup', {
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify({ name, age, number, email, password }),
