@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client("82449913701-a10nsdha9sb0mgo42u9emft6nr45asd5.apps.googleusercontent.com");
 var corsOptions = {
     origin: 'http://localhost:3000',
     credentials: true,
@@ -12,6 +14,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 app.use(authRoutes);
+
 
 const http = require('http').createServer(app);
 const mongoose = require('mongoose');
@@ -137,6 +140,17 @@ io.on('connection', (socket) => {
 
 app.get('/', (req, res) => {
     res.send("Welcome to server");
+});
+
+app.post('/api/google-login', async (req, res) => {
+    const { token } = req.body;
+    const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: "82449913701-a10nsdha9sb0mgo42u9emft6nr45asd5.apps.googleusercontent.com",
+    });
+    const { name, email, jti } = ticket.getPayload();
+    res.status(201);
+    res.json({ name, email, jti });
 });
 
 

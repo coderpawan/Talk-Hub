@@ -8,6 +8,7 @@ import { UserContext } from '../../../UserContext';
 import { Redirect } from 'react-router-dom';
 import img from '../../../account-image.png';
 
+
 import '../signup/signup.css'
 
 const clientId = "82449913701-a10nsdha9sb0mgo42u9emft6nr45asd5.apps.googleusercontent.com";
@@ -60,17 +61,39 @@ const Login = () => {
         }
     }
 
-    const onLoginSuccess = (res) => {
-        console.log('Login Success:', res.profileObj);
-        console.log(res.profileObj.name);
-        console.log(res.profileObj.googleId);
+    const onLoginSuccess = async (res) => {
+
+        const ress = await fetch('http://localhost:5000/api/google-login', {
+            method: 'POST',
+            body: JSON.stringify({
+                token: res.tokenId,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const data = await ress.json();
+      
+
+        console.log(data);
+
+         
+
+
+
+        console.log('Login Success:',data);
 
         const newuser = {
-            name: res.profileObj.name,
-            _id: res.profileObj.googleId,
-            email: res.profileObj.email
+            name: data.name,
+            _id: data.jti,
+            email: data.email
 
         }
+
+        localStorage.setItem('loginData',newuser);
+
+        console.log(newuser);
 
 
         setUser(newuser);
