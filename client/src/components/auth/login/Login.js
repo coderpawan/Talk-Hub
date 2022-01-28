@@ -65,7 +65,7 @@ const Login = () => {
 
     const onLoginSuccess = async (res) => {
 
-        const ress = await fetch('http://localhost:5000/api/google-login', {
+        const ress = await fetch('https://ashutoshchatroom.herokuapp.com/api/google-login', {
             method: 'POST',
             body: JSON.stringify({
                 token: res.tokenId,
