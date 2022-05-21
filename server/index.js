@@ -130,9 +130,9 @@ app.post('/api/google-login', async (req, res) => {
         idToken: token,
         audience: "82449913701-a10nsdha9sb0mgo42u9emft6nr45asd5.apps.googleusercontent.com",
     });
-    const { name, email, jti } = ticket.getPayload();
+    const { name, email, sub } = ticket.getPayload();
     res.status(201);
-    res.json({ name, email, jti });
+    res.json({ name, email, sub });
 
 });
 

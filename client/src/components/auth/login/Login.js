@@ -90,7 +90,7 @@ const Login = () => {
 
         const newuser = {
             name: data.name,
-            _id: data.jti,
+            _id: data.sub,
             email: data.email
 
         }
