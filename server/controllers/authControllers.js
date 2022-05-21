@@ -13,7 +13,7 @@ const alertError = (err) => {
     if (err.message === 'incorrect email') {
         errors.email = 'This email not found';
     }
-    if (err.message === 'incorrect pwd') {
+    if (err.message === 'incorrect password') {
         errors.password = 'The password is incorrect';
     }
     if (err.code === 11000) {
