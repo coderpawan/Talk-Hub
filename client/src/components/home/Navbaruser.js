@@ -2,16 +2,7 @@ import React from 'react'
 
 const Navbaruser = () => {
     const logout = async () => {
-        try {
-            const res = await fetch('https://ashutoshchatroom.herokuapp.com/logout', {
-                credentials: 'include',
-            });
-            const data = res.json();
-            console.log('logout data', data);
-        } catch (error) {
-            console.log(error)
-        }
-
+        localStorage.removeItem('loginData')
     }
     return (
         <div>

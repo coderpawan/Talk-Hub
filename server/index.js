@@ -12,9 +12,7 @@ var corsOptions = {
 const authRoutes = require('./Routes/authRoutes');
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(cookieParser());
 app.use(authRoutes);
-
 
 const http = require('http').createServer(app);
 const mongoose = require('mongoose');
@@ -59,22 +57,6 @@ const deleteroom = async (room_id) => {
     await Room.findByIdAndDelete(room_id.room_id);
 
 }
-
-app.use('/set-cookies', (req, res) => {
-    res.cookie('username', 'Tony');
-    res.cookie('isAuthenticated', true, { httpOnly: true });
-    res.send('Cookies are set');
-
-})
-
-app.use('/get-cookies', (req, res) => {
-
-    const cookies = req.cookies;
-    console.log(cookies);
-    res.json(cookies);
-
-
-})
 
 io.on('connection', (socket) => {
     console.log(socket.id);
@@ -172,6 +154,7 @@ app.post('/api/google-login', async (req, res) => {
     const { name, email, sub } = ticket.getPayload();
     res.status(201);
     res.json({ name, email, sub });
+
 });
 
 
