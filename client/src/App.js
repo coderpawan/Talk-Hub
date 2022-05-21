@@ -9,21 +9,28 @@ import Login from './components/auth/login/Login';
 import Signup from './components/auth/signup/Signup';
 
 
+const getlocal = () => {
+  let login = localStorage.getItem('loginData');
+  console.log(JSON.parse(login));
+
+  if (login) {
+    return JSON.parse(login);
+  }
+}
+
+
+
 function App() {
   const [user, setUser] = useState(null)
   useEffect(() => {
     const verifyUser = async () => {
-      try {
-        const res = await fetch('https://ashutoshchatroom.herokuapp.com/verifyuser', {
-          credentials: 'include',
-          headers: { 'Content-Type': 'application/json' }
-        });
-        const data = await res.json();
-        setUser(data);
-      } catch (error) {
-        console.log(error)
-      }
 
+     
+      if(getlocal())
+      {
+        console.log(getlocal());
+        setUser(getlocal())
+      }
 
     }
     verifyUser()
