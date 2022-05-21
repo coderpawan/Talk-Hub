@@ -32,8 +32,6 @@ const Signup = () => {
                 setemailError(data.errors.email);
                 setnameError(data.errors.name);
                 setpasswordError(data.errors.password);
-
-
             }
             if (data.user) {
 
@@ -47,6 +45,7 @@ const Signup = () => {
                 console.log(newuser);
 
                 setUser(newuser)
+                localStorage.setItem('loginData', JSON.stringify(newuser));
             }
         } catch (error) {
             console.log(error)

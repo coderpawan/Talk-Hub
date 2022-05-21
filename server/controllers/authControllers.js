@@ -54,29 +54,6 @@ module.exports.login = async (req, res) => {
         res.status(400).json({ errors });
     }
 }
-module.exports.verifyuser = (req, res, next) => {
-    const token = req.cookies.jwt;
-    if (token) {
-        jwt.verify(token, 'chatroom secret', async (err, decodedToken) => {
-            console.log('decoded token', decodedToken)
-            if (err) {
-                console.log(err.message)
-            } else {
-                let user = await User.findById(decodedToken.id)
-                res.json(user);
-                next();
-
-            }
-        })
-    } else {
-        next();
-    }
-}
-module.exports.logout = (req, res) => {
-    console.log("ashutosh");
-    res.cookie('jwt', "", { maxAge: 1 })
-    res.status(200).json({ logout: true })
-}
 
 
 

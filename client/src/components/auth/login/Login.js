@@ -15,6 +15,7 @@ const clientId = "82449913701-a10nsdha9sb0mgo42u9emft6nr45asd5.apps.googleuserco
 
 
 
+
 const Login = () => {
     const { user, setUser } = useContext(UserContext);
     const [email, setemail] = useState('');
@@ -54,7 +55,10 @@ const Login = () => {
 
                 console.log(newuser);
 
-                setUser(newuser)
+                setUser(newuser);
+                localStorage.setItem('loginData', JSON.stringify(newuser));
+
+                
             }
         } catch (error) {
             console.log(error)
@@ -91,12 +95,9 @@ const Login = () => {
 
         }
 
-        localStorage.setItem('loginData',newuser);
-
         console.log(newuser);
-
-
         setUser(newuser);
+        localStorage.setItem('loginData', JSON.stringify(newuser));
     };
 
     const onLoginFailure = (res) => {
@@ -146,8 +147,6 @@ const Login = () => {
                             cookiePolicy={'single_host_origin'}
                             isSignedIn={true}
                         />
-
-                
 
                     </div>
 

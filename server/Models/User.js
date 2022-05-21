@@ -2,16 +2,6 @@ const mongoose = require('mongoose');
 const { isEmail } = require('validator');
 const bcrypt = require('bcrypt');
 
-
-// var check = function (val){
-//     if(val.includes("@itbhu.ac.in"))
-//     {
-//         return true;
-
-//     }
-//     return false;
-// }
-
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
