@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 let socket;
 
 export const Room = ({ name,user,room_id,rooms,setrooms}) => {
-    const ENDPT = 'localhost:5000';
+    const ENDPT = 'https://ashutoshchatroom.herokuapp.com';
     const style = {
         color: 'white',
      

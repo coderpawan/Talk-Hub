@@ -9,7 +9,7 @@ let socket;
 
 const Home = () => {
 
-    const ENDPT = 'localhost:5000';
+    const ENDPT = 'https://ashutoshchatroom.herokuapp.com/';
     useEffect(() => {
         socket = io(ENDPT);
         return () => {
