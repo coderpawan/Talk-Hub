@@ -55,7 +55,7 @@ const Login = () => {
 
 
                 console.log(newuser);
-                localStorage.setItem('loginData', newuser);
+                localStorage.setItem('loginData', JSON.stringify(newuser));
 
                 setUser(newuser)
             }
@@ -94,7 +94,7 @@ const Login = () => {
 
         }
 
-        localStorage.setItem('loginData',newuser);
+        localStorage.setItem('loginData', JSON.stringify(newuser));
 
         console.log(newuser);
 
