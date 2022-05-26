@@ -55,6 +55,7 @@ const Login = () => {
 
 
                 console.log(newuser);
+                localStorage.setItem('loginData', newuser);
 
                 setUser(newuser)
             }
