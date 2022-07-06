@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
 const cors = require('cors')
+const dotenv=require('dotenv');
 const cookieParser = require('cookie-parser')
 const { OAuth2Client } = require('google-auth-library');
-const client = new OAuth2Client("82449913701-a10nsdha9sb0mgo42u9emft6nr45asd5.apps.googleusercontent.com");
+dotenv.config();
+const client = new OAuth2Client(process.env.oath);
 var corsOptions = {
     origin: 'https://brave-elion-16c499.netlify.app',
     credentials: true,
@@ -40,7 +42,7 @@ const removeUser = (socket_id) => {
 const getUser = (socket_id) => users.find(user => user.socket_id === socket_id)
 
 const io = socketio(http);
-mongoose.connect("mongodb+srv://ashutosh_gupta:ashu2111@cluster0.jwwlc.mongodb.net/chat-database?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('connected')).catch(err => console.log(err))
+mongoose.connect(process.env.mongoDB, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('connected')).catch(err => console.log(err))
 
 const Message = require('./Models/Message');
 const PORT = process.env.PORT || 5000;
@@ -149,7 +151,7 @@ app.post('/api/google-login', async (req, res) => {
     const { token } = req.body;
     const ticket = await client.verifyIdToken({
         idToken: token,
-        audience: "82449913701-a10nsdha9sb0mgo42u9emft6nr45asd5.apps.googleusercontent.com",
+        audience: process.env.audi,
     });
     const { name, email, sub } = ticket.getPayload();
     res.status(201);
