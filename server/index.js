@@ -20,6 +20,17 @@ const http = require('http').createServer(app);
 const mongoose = require('mongoose');
 const socketio = require('socket.io');
 const users = [];
+
+app.get('/set-cookies', (req, res) => {
+    res.cookie('username', 'Tony');
+    res.cookie('isAuthenticated', true, { maxAge: 24 * 60 * 60 * 1000 });
+    res.send('cookies are set');
+})
+app.get('/get-cookies', (req, res) => {
+    const cookies = req.cookies;
+    console.log(cookies);
+    res.json(cookies);
+})
 const addUser = ({ socket_id, name, user_id, room_id }) => {
     const exist = users.find(user => user.room_id === room_id && user.user_id === user_id);
     if (exist) {

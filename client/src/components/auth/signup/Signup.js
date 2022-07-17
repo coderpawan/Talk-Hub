@@ -45,7 +45,7 @@ const Signup = () => {
                 console.log(newuser);
 
                 setUser(newuser)
-                localStorage.setItem('loginData', JSON.stringify(newuser));
+                // localStorage.setItem('loginData', JSON.stringify(newuser));
             }
         } catch (error) {
             console.log(error)
